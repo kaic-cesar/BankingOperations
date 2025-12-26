@@ -1,6 +1,7 @@
 public class Conta {
     private double saldo = 0.0;
-    private double  chequeEspecial = 0.0;
+    private double chequeEspecial = 0.0;
+    private double limite = 0.0;
 
     public double getSaldo(){
         return saldo;
@@ -9,6 +10,12 @@ public class Conta {
     public double getChequeEspecial() {
         return chequeEspecial;
     }
+
+    public double getLimite(){
+        limite = saldo + chequeEspecial;
+        return limite;
+    }
+
 
     public ResponseDeposito depositar(double valor){
         if(valor <= 0){
@@ -36,6 +43,7 @@ public class Conta {
             return ResponseDeposito.SUCESSO;
         }
     }
+
 
     public enum ResponseDeposito {
         SUCESSO,

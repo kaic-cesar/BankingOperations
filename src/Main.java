@@ -22,6 +22,8 @@ public class Main {
             System.out.println("2: Consultar cheque especial");
             System.out.println("3: Depositar");
             System.out.println("4: Sacar");
+            System.out.println("5: Consultar limite");
+            System.out.println("0: Sair");
 
             System.out.print("Digite a opção que deseja: ");
             option = scanner.nextInt();
@@ -31,6 +33,9 @@ public class Main {
                 case 2 -> System.out.println("\nCheque especial R$" + consultarChequeEspecial());
                 case 3 -> depositar();
                 case 4 -> sacar();
+                case 5 -> consultarLimite();
+                case 6 -> option = 0;
+                default -> System.out.println("Opção inválida");
             }
         } while (option != 0);
 
@@ -70,8 +75,15 @@ public class Main {
             System.out.println("Saque efetuado com sucesso!");
             System.out.print("Saldo atual: " + conta.getSaldo());
         }
+    }
 
+    public void consultarLimite() {
+        double response = conta.getLimite();
+        if(response < 0.1){
+            System.out.println("Você precisa depositar para liberar limite");
+        }
 
+        System.out.println("Limite total: R$ " + response + "\n(Saldo + Cheque Especial)");
     }
 
 }
