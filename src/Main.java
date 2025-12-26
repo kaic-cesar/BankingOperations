@@ -21,6 +21,7 @@ public class Main {
             System.out.println("1: Consultar saldo");
             System.out.println("2: Consultar cheque especial");
             System.out.println("3: Depositar");
+            System.out.println("4: Sacar");
 
             System.out.print("Digite a opção que deseja: ");
             option = scanner.nextInt();
@@ -29,6 +30,7 @@ public class Main {
                 case 1 -> System.out.println("\nSaldo R$" + consultaSaldo());
                 case 2 -> System.out.println("\nCheque especial R$" + consultarChequeEspecial());
                 case 3 -> depositar();
+                case 4 -> sacar();
             }
         } while (option != 0);
 
@@ -52,8 +54,23 @@ public class Main {
         } else {
             System.out.println("Depósito realizado com sucesso!");
             System.out.print("Saldo atual: " + conta.getSaldo());
-
         }
+    }
+
+    public void sacar() {
+        System.out.print("\nValor: R$ ");
+        double valor = scanner.nextDouble();
+        Conta.ResponseDeposito response = conta.sacarDinheiro(valor);
+
+        if(response == Conta.ResponseDeposito.VALOR_INCORRETO) {
+            System.out.println("Valor informado está incorreto");
+        } else if(response == Conta.ResponseDeposito.SALDO_INSUFICIENTE) {
+            System.out.println("Saldo insuficiente");
+        } else {
+            System.out.println("Saque efetuado com sucesso!");
+            System.out.print("Saldo atual: " + conta.getSaldo());
+        }
+
 
     }
 

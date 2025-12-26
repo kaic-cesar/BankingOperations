@@ -1,6 +1,6 @@
 public class Conta {
     private double saldo = 0.0;
-    private double chequeEspecial = 0.0;
+    private double  chequeEspecial = 0.0;
 
     public double getSaldo(){
         return saldo;
@@ -22,6 +22,17 @@ public class Conta {
         } else {
             saldo += valor;
             chequeEspecial += (saldo / 2);
+            return ResponseDeposito.SUCESSO;
+        }
+    }
+
+    public ResponseDeposito sacarDinheiro(double valor) {
+        if(valor <= 0) {
+            return ResponseDeposito.VALOR_INCORRETO;
+        } else if(valor > saldo) {
+            return ResponseDeposito.SALDO_INSUFICIENTE;
+        } else {
+            saldo -= valor;
             return ResponseDeposito.SUCESSO;
         }
     }
